@@ -1,6 +1,9 @@
 # Flick-Gpt
  -Creat react app
  -Installed Tailwind css 
+ -Header
+ -Login Form
+ -Sign up Form
 
 #Features
 - SignIn / SignUp Form 
