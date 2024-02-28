@@ -6,11 +6,10 @@ import { checkValidData } from "../utils/validate";
 import { auth } from './../utils/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {addUser} from "./../utils/userSlice";
-import { useNavigate } from "react-router-dom";
+import { BG_URL, USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -31,7 +30,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         updateProfile(user, {
-          displayName: name.current.value, photoURL: "https://avatars.githubusercontent.com/u/111233383?s=400&u=fc441d8e975aa723ed2998085ae244526d114320&v=4"
+          displayName: name.current.value, photoURL:USER_AVATAR
         }).then(() => {        
           const { uid, email, displayName, photoURL } = auth.currentUser;
           dispatch(
@@ -42,7 +41,6 @@ const Login = () => {
               photoURL: photoURL,
             })
         );
-          navigate("/browse");
         }).catch((error) => {
           setErrorMessage(errorMessage);
         });
@@ -56,7 +54,6 @@ const Login = () => {
         signInWithEmailAndPassword(auth, email.current.value, password.current.value)
           .then((userCredential) => {
             const user = userCredential.user;
-            navigate("/browse");
           })
           .catch((error) => {
             const errorCode = error.code;
