@@ -33,8 +33,8 @@ const GptSearchBar = () => {
       ". only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya";
 
     const gptResults = await openai.chat.completions.create({
-      messages: [{ role: 'user', content: 'Say this is a test' }],
-      model: 'gpt-3.5-turbo',
+      messages: [{ role: "user", content: gptQuery }],
+      model: "gpt-3.5-turbo",
     });
 
     if (!gptResults.choices) {
@@ -43,13 +43,19 @@ const GptSearchBar = () => {
 
     console.log(gptResults.choices?.[0]?.message?.content);
 
+    // Andaz Apna Apna, Hera Pheri, Chupke Chupke, Jaane Bhi Do Yaaro, Padosan
     const gptMovies = gptResults.choices?.[0]?.message?.content.split(",");
 
+    // ["Andaz Apna Apna", "Hera Pheri", "Chupke Chupke", "Jaane Bhi Do Yaaro", "Padosan"]
+
+    // For each movie I will search TMDB API
+
     const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
+    // [Promise, Promise, Promise, Promise, Promise]
 
     const tmdbResults = await Promise.all(promiseArray);
 
-    console.log("thetmdbResults",tmdbResults);
+    console.log(tmdbResults);
 
     dispatch(
       addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
