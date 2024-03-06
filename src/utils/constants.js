@@ -8,7 +8,7 @@ export const API_OPTIONS = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjI1NDY0YTk3YTQyZDhkOTI3MmJhZDVjNWI3YzZiNiIsInN1YiI6IjY1N2U5ZjMzOTA0ZjZkMDc0NjdmNWQyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Fx8pmO8HWBRi4I79EYdR7gJDPRz5lTTLHbJhNfhoT-Y'
+    Authorization:  "Bearer " + process.env.REACT_APP_TMDB_KEY,
   }
 };
 
@@ -23,5 +23,5 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "spanish", name: "Spanish" },
 ];
 
-export const OPENAI_KEY = "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"; 
+export const OPENAI_KEY =  process.env.REACT_APP_OPENAI_KEY; 
 //sripic369@gmail.com
